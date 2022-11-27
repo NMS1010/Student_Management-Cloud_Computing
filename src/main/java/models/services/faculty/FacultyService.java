@@ -7,6 +7,12 @@ import models.view_models.faculty.FacultyViewModel;
 import java.util.ArrayList;
 
 public class FacultyService implements IFacultyService{
+    private static FacultyService instance = null;
+    public static FacultyService getInstance(){
+        if(instance == null)
+            instance = new FacultyService();
+        return instance;
+    }
     @Override
     public boolean insert(FacultyCreateRequest request) {
         return false;
