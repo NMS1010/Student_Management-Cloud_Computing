@@ -1,7 +1,7 @@
 package models.services.student;
 
-import models.view_models.student.StudentClassCreateRequest;
-import models.view_models.student.StudentClassUpdateRequest;
+import models.view_models.student.StudentCreateRequest;
+import models.view_models.student.StudentUpdateRequest;
 import models.view_models.student.StudentViewModel;
 
 import java.util.ArrayList;
@@ -14,12 +14,12 @@ public class StudentService implements IStudentService {
         return instance;
     }
     @Override
-    public boolean insert(StudentClassCreateRequest request) {
+    public boolean insert(StudentCreateRequest request) {
         return false;
     }
 
     @Override
-    public boolean update(StudentClassUpdateRequest request) {
+    public boolean update(StudentUpdateRequest request) {
         return false;
     }
 
