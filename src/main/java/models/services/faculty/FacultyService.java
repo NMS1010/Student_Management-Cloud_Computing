@@ -1,5 +1,6 @@
 package models.services.faculty;
 
+import models.repositories.faculty.FacultyRepository;
 import models.view_models.faculty.FacultyCreateRequest;
 import models.view_models.faculty.FacultyUpdateRequest;
 import models.view_models.faculty.FacultyViewModel;
@@ -15,26 +16,26 @@ public class FacultyService implements IFacultyService{
     }
     @Override
     public boolean insert(FacultyCreateRequest request) {
-        return false;
+        return FacultyRepository.getInstance().insert(request);
     }
 
     @Override
     public boolean update(FacultyUpdateRequest request) {
-        return false;
+        return FacultyRepository.getInstance().update(request);
     }
 
     @Override
     public boolean delete(String hashKey, String rangeKey) {
-        return false;
+        return FacultyRepository.getInstance().delete(hashKey, rangeKey);
     }
 
     @Override
     public FacultyViewModel retrieveById(String hashKey, String rangeKey) {
-        return null;
+        return FacultyRepository.getInstance().retrieveById(hashKey,rangeKey);
     }
 
     @Override
     public ArrayList<FacultyViewModel> retrieveAll() {
-        return null;
+        return FacultyRepository.getInstance().retrieveAll();
     }
 }
