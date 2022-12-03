@@ -1,41 +1,33 @@
-package models.view_models.grade;
+package models.entities;
 
-public class GradeUpdateRequest {
+public class Grade {
     private String studentId;
     private String subjectGroupId;
     private double middleGrade;
     private double finalGrade;
-    private double totalGrade;
-    private String deleted;
+    private int deleted;
 
-    public String getDeleted() {
+    public int getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(String deleted) {
+    public void setDeleted(int deleted) {
         this.deleted = deleted;
     }
-    public double getTotalGrade() {
-        return totalGrade;
-    }
-
-    public void setTotalGrade(double totalGrade) {
-        this.totalGrade = totalGrade;
-    }
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
     public String getSubjectGroupId() {
         return subjectGroupId;
     }
 
     public void setSubjectGroupId(String subjectGroupId) {
         this.subjectGroupId = subjectGroupId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public double getMiddleGrade() {

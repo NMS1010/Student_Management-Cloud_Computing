@@ -5,11 +5,9 @@ import models.view_models.subject.SubjectUpdateRequest;
 import models.view_models.subject.SubjectViewModel;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "EditSubject", value = "/admin/subject/edit")
@@ -40,6 +38,7 @@ public class EditSubject extends HttpServlet {
         updateReq.setSubjectName(subjectName);
         updateReq.setCreditsNo(creditsNo);
         updateReq.setPeriodsNo(periodsNo);
+        updateReq.setDeleted(request.getParameter("deleted"));
 
         boolean isSuccess = SubjectService.getInstance().update(updateReq);
         String error = "";

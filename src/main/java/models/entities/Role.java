@@ -1,15 +1,15 @@
-package models.view_models.role;
+package models.entities;
 
-public class RoleCreateRequest {
+public class Role {
     private String roleId;
     private String roleName;
-    private String deleted;
+    private int deleted;
 
-    public String getDeleted() {
+    public int getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(String deleted) {
+    public void setDeleted(int deleted) {
         this.deleted = deleted;
     }
     public String getRoleId() {

@@ -65,6 +65,15 @@
                                         </div>
 
                                         <div class="row">
+                                            <label for="deleted" class="col-12 col-form-label">Trạng thái</label>
+                                            <div class="col-12">
+                                                <select name="deleted" id="deleted" class="form-select" required>
+                                                    <option value="1">Đã xoá</option>
+                                                    <option value="0">Đang dùng</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <label for="dob" class="col-12 col-form-label">Ngày sinh</label>
                                             <div class="col-12">
                                                 <input id="dob" name="dob" class="form-control here slug-title" type="date" value="${lecture.dob}" required/>
@@ -322,8 +331,8 @@
         }else {
             roleEmpty.html('')
         }
-        if(${lecture == null}) {
-            let url = context + `/admin/users/check-add`;
+        let url = context + `/admin/users/check-add`;
+        if(!window.location.href.includes("edit")){
             $.ajax({
                 url: url,
                 method: "POST",
@@ -334,7 +343,7 @@
                 success: function (data) {
                     console.log(data)
                     let str = data.toString()
-                    let arr = str.replace('[', '').replace(']', '').split(', ');
+                    let arr = str.substring(0, str.lastIndexOf(']')).replace('[','').replace(']','').split(', ');
                     console.log(arr)
                     if (arr.includes('user')) {
                         $('#userValidateMessage').html('Tên tài khoản đã tồn tại').css('color', 'red')
@@ -348,6 +357,7 @@
                 }
             })
         }
+
         if (noError) {
             $('#form-add').unbind('submit').submit();
         }

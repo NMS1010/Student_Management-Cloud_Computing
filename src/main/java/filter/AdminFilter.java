@@ -1,6 +1,7 @@
 package filter;
 
 import models.view_models.lecture.LectureViewModel;
+import models.view_models.user.UserViewModel;
 import utils.ServletUtils;
 
 import javax.servlet.*;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminFilter")
+@WebFilter(filterName = "AdminFilter", urlPatterns = {
+        "/admin/*"
+})
 public class AdminFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }

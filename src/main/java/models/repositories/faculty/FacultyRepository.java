@@ -12,8 +12,8 @@ import models.repositories.student_class.StudentClassRepository;
 import models.services.AmazonDynamoDB.AmazonDynamoDBService;
 import models.services.AmazonS3.AmazonS3Service;
 import models.view_models.faculty.FacultyCreateRequest;
-import models.view_models.faculty.FacultyUpdateRequest;
 import models.view_models.faculty.FacultyViewModel;
+import models.view_models.faculty.FacultyUpdateRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +38,7 @@ public class FacultyRepository implements IFacultyRepository{
                     .withString("facultyName", request.getFacultyName())
                     .withString("image", AmazonS3Service.getInstance().uploadFile(request.getFile().getSubmittedFileName(),
                             request.getFile().getInputStream()))
-                    .withString("deleted", "0");
+                    .withString("deleted", request.getDeleted());
             table.putItem(item);
 
         }
@@ -58,9 +58,11 @@ public class FacultyRepository implements IFacultyRepository{
             if(!Objects.equals(request.getFile().getSubmittedFileName(), ""))
                 expressionAttributeNames.put("#Q", "image");
 
+            expressionAttributeNames.put("#R", "deleted");
             Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
             expressionAttributeValues.put(":val1", request.getFacultyName());
-            String s = "set #P = :val1";
+            expressionAttributeValues.put(":val3", request.getDeleted());
+            String s = "set #P = :val1, #R = :val3";
             if(!Objects.equals(request.getFile().getSubmittedFileName(), "")) {
                 expressionAttributeValues.put(":val2", AmazonS3Service.getInstance().uploadFile(request.getFile().getSubmittedFileName(),
                         request.getFile().getInputStream()));

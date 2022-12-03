@@ -8,13 +8,11 @@ import models.view_models.user.UserCreateRequest;
 import models.view_models.user_role.UserRoleCreateRequest;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "AddLecture", value = "/admin/lecture/add")
 @MultipartConfig(
@@ -49,6 +47,7 @@ public class AddLecture extends HttpServlet {
         createReq.setPhone(phone);
         createReq.setGender(gender);
         createReq.setFile(request.getPart("lecture-image"));
+        createReq.setDeleted(request.getParameter("deleted"));
         boolean success = LectureService.getInstance().insert(createReq);
         String error = "";
         if(!success){

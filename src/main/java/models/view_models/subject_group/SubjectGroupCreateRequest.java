@@ -5,7 +5,15 @@ public class SubjectGroupCreateRequest {
     private String subjectGroupName;
     private String subjectId;
     private String lectureId;
+    private String deleted;
 
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
     public String getSubjectGroupId() {
         return subjectGroupId;
     }

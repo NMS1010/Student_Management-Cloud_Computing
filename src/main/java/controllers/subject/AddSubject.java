@@ -2,13 +2,12 @@ package controllers.subject;
 
 import models.services.subject.SubjectService;
 import models.view_models.subject.SubjectCreateRequest;
+import models.view_models.subject.SubjectCreateRequest;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "AddSubject", value = "/admin/subject/add")
@@ -28,6 +27,7 @@ public class AddSubject extends HttpServlet {
         createReq.setSubjectName(request.getParameter("subjectName"));
         createReq.setCreditsNo(Integer.parseInt(request.getParameter("creditsNo")));
         createReq.setPeriodsNo(Integer.parseInt(request.getParameter("periodsNo")));
+        createReq.setDeleted(request.getParameter("deleted"));
 
         boolean success = SubjectService.getInstance().insert(createReq);
         String error = "";

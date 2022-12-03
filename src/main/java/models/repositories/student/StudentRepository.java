@@ -42,7 +42,7 @@ public class StudentRepository implements IStudentRepository{
                     .withString("gender",request.getGender())
                     .withString("phone",request.getPhone())
                     .withString("image", AmazonS3Service.getInstance().uploadFile(request.getFile().getSubmittedFileName(), request.getFile().getInputStream()))
-                    .withString("deleted","0");
+                    .withString("deleted",request.getDeleted());
             table.putItem(item);
 
         }
@@ -64,6 +64,7 @@ public class StudentRepository implements IStudentRepository{
             expressionAttributeNames.put("#P4", "address");
             expressionAttributeNames.put("#P5", "gender");
             expressionAttributeNames.put("#P6", "phone");
+            expressionAttributeNames.put("#P8", "deleted");
             if(!Objects.equals(request.getFile().getSubmittedFileName(), ""))
                 expressionAttributeNames.put("#P7", "image");
 
@@ -74,9 +75,10 @@ public class StudentRepository implements IStudentRepository{
             expressionAttributeValues.put(":val4", request.getAddress());
             expressionAttributeValues.put(":val5", request.getGender());
             expressionAttributeValues.put(":val6", request.getPhone());
+            expressionAttributeValues.put(":val8", request.getDeleted());
             if(!Objects.equals(request.getFile().getSubmittedFileName(), ""))
                 expressionAttributeValues.put(":val7", AmazonS3Service.getInstance().uploadFile(request.getFile().getSubmittedFileName(), request.getFile().getInputStream()));
-            String query = "set #P1 = :val1, #P2 = :val2, #P3 = :val3, #P4 = :val4, #P5 = :val5, #P6 = :val6";
+            String query = "set #P1 = :val1, #P2 = :val2, #P3 = :val3, #P4 = :val4, #P5 = :val5, #P6 = :val6, #P8 = :val8";
 
             if(!Objects.equals(request.getFile().getSubmittedFileName(), ""))
                 query += ", #P7 = :val7";

@@ -1,5 +1,6 @@
 package models.services.lecture;
 
+import models.repositories.faculty.FacultyRepository;
 import models.repositories.lecture.LectureRepository;
 import models.view_models.lecture.LectureCreateRequest;
 import models.view_models.lecture.LectureUpdateRequest;

@@ -5,13 +5,9 @@ import models.view_models.faculty.FacultyUpdateRequest;
 import models.view_models.faculty.FacultyViewModel;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "EditFaculty", value = "/admin/faculty/edit")
@@ -43,6 +39,7 @@ public class EditFaculty extends HttpServlet {
         updateReq.setFacultyId(facultyId);
         updateReq.setFile(logo);
         updateReq.setFacultyName(facultyName);
+        updateReq.setDeleted(request.getParameter("deleted"));
 
         boolean isSuccess = FacultyService.getInstance().update(updateReq);
         String error = "";

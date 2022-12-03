@@ -38,7 +38,7 @@ public class StudentClassRepository implements IStudentClassRepository{
             Item item = new Item().withPrimaryKey("studentClassId", request.getStudentClassId())
                     .withString("studentClassName", request.getStudentClassName())
                     .withString("facultyId", request.getFacultyId())
-                    .withString("deleted", "0");
+                    .withString("deleted", request.getDeleted());
             table.putItem(item);
 
         }
@@ -56,13 +56,15 @@ public class StudentClassRepository implements IStudentClassRepository{
             Map<String, String> expressionAttributeNames = new HashMap<String, String>();
             expressionAttributeNames.put("#P1", "studentClassName");
             expressionAttributeNames.put("#P2", "facultyId");
+            expressionAttributeNames.put("#P3", "deleted");
 
             Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
             expressionAttributeValues.put(":val1", request.getStudentClassName());
             expressionAttributeValues.put(":val2", request.getFacultyId());
+            expressionAttributeValues.put(":val3", request.getDeleted());
 
             UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey("studentClassId", request.getStudentClassId())
-                    .withUpdateExpression("set #P1 = :val1, #P2 = :val2")
+                    .withUpdateExpression("set #P1 = :val1, #P2 = :val2, #P3 = :val3")
                     .withNameMap(expressionAttributeNames)
                     .withValueMap(expressionAttributeValues);
 

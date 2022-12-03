@@ -5,7 +5,15 @@ public class SubjectCreateRequest {
     private String subjectName;
     private int creditsNo;
     private int periodsNo;
+    private String deleted;
 
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
     public String getSubjectId() {
         return subjectId;
     }

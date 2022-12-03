@@ -6,7 +6,15 @@ public class GradeCreateRequest {
     private double middleGrade;
     private double finalGrade;
     private double totalGrade;
+    private String deleted;
 
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
     public double getTotalGrade() {
         return totalGrade;
     }

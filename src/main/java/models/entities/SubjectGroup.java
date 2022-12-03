@@ -1,19 +1,12 @@
-package models.view_models.subject_group;
+package models.entities;
 
-public class SubjectGroupUpdateRequest {
+public class SubjectGroup {
     private String subjectGroupId;
     private String subjectGroupName;
     private String subjectId;
     private String lectureId;
-    private String deleted;
+    private int deleted;
 
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
-    }
     public String getSubjectGroupId() {
         return subjectGroupId;
     }
@@ -44,5 +37,13 @@ public class SubjectGroupUpdateRequest {
 
     public void setLectureId(String lectureId) {
         this.lectureId = lectureId;
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
 }

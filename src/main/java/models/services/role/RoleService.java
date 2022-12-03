@@ -1,6 +1,7 @@
 package models.services.role;
 
 
+import models.entities.Role;
 import models.repositories.role.RoleRepository;
 import models.view_models.role.RoleCreateRequest;
 import models.view_models.role.RoleUpdateRequest;

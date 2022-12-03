@@ -5,11 +5,9 @@ import models.view_models.subject_group.SubjectGroupUpdateRequest;
 import models.view_models.subject_group.SubjectGroupViewModel;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "EditSubjectGroup", value = "/admin/subjectGroup/edit")
@@ -39,6 +37,7 @@ public class EditSubjectGroup extends HttpServlet {
         updateReq.setSubjectGroupName(subjectGroupName);
         updateReq.setSubjectId(subjectId);
         updateReq.setLectureId(lectureId);
+        updateReq.setDeleted(request.getParameter("deleted"));
 
         boolean isSuccess = SubjectGroupService.getInstance().update(updateReq);
         String error = "";

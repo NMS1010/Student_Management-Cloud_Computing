@@ -40,7 +40,7 @@ public class GradeRepository implements IGradeRepository{
                     .withDouble("middleGrade", request.getMiddleGrade())
                     .withDouble("finalGrade", request.getFinalGrade())
                     .withDouble("totalGrade", request.getTotalGrade())
-                    .withString("deleted", "0");
+                    .withString("deleted", request.getDeleted());
             table.putItem(item);
 
         }
@@ -59,14 +59,16 @@ public class GradeRepository implements IGradeRepository{
             expressionAttributeNames.put("#P", "middleGrade");
             expressionAttributeNames.put("#Q", "finalGrade");
             expressionAttributeNames.put("#R", "totalGrade");
+            expressionAttributeNames.put("#S", "deleted");
 
             Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
             expressionAttributeValues.put(":val1", request.getMiddleGrade());
             expressionAttributeValues.put(":val2", request.getFinalGrade());
             expressionAttributeValues.put(":val3", request.getTotalGrade());
+            expressionAttributeValues.put(":val4", request.getDeleted());
 
             UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey("studentId", request.getStudentId(), "subjectGroupId", request.getSubjectGroupId())
-                    .withUpdateExpression("set #P = :val1, #Q = :val2, #R = :val3")
+                    .withUpdateExpression("set #P = :val1, #Q = :val2, #R = :val3, #S = :val4")
                     .withNameMap(expressionAttributeNames)
                     .withValueMap(expressionAttributeValues);
 

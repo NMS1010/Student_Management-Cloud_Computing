@@ -9,9 +9,9 @@ import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import models.repositories.user_role.UserRoleRepository;
 import models.services.AmazonDynamoDB.AmazonDynamoDBService;
+import models.view_models.role.RoleViewModel;
 import models.view_models.role.RoleCreateRequest;
 import models.view_models.role.RoleUpdateRequest;
-import models.view_models.role.RoleViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ public class RoleRepository implements IRoleRepository{
 
             Item item = new Item().withPrimaryKey("roleId", request.getRoleId())
                     .withString("roleName", request.getRoleName())
-                    .withString("deleted", "0");
+                    .withString("deleted", request.getDeleted());
             table.putItem(item);
 
         }
@@ -50,12 +50,14 @@ public class RoleRepository implements IRoleRepository{
         try {
             Map<String, String> expressionAttributeNames = new HashMap<String, String>();
             expressionAttributeNames.put("#P", "roleName");
+            expressionAttributeNames.put("#Q", "deleted");
 
             Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
             expressionAttributeValues.put(":val1", request.getRoleName());
+            expressionAttributeValues.put(":val2", request.getDeleted());
 
             UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey("roleId", request.getRoleId())
-                    .withUpdateExpression("set #P = :val1")
+                    .withUpdateExpression("set #P = :val1, #Q = :val2")
                     .withNameMap(expressionAttributeNames)
                     .withValueMap(expressionAttributeValues);
 

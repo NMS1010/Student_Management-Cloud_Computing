@@ -5,8 +5,11 @@ import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.*;
 import models.services.AmazonDynamoDB.AmazonDynamoDBService;
+import models.services.AmazonS3.AmazonS3Service;
+import models.view_models.faculty.FacultyCreateRequest;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,84 +19,84 @@ public class DynamoDBUtils {
     public static void main(String[] args) {
         DropAllTable();
         GenerateTable();
-        //InitialData();
+        InitialData();
     }
-//    private static void InitialData(){
-//        Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("faculty");
-//        try {
-//
-//            Item item = new Item().withPrimaryKey("facultyId", "FIT")
-//                    .withString("facultyName", "Công nghệ thông tin")
-//                    .withString("image", AmazonS3Service.getInstance().uploadFile("FIT.png", Files.newInputStream(new File("src/main/webapp/assets/admin/img/faculty/FIT.png").toPath())))
-//                    .withString("deleted", "0");
-//            table.putItem(item);
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            return;
-//        }
-//        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("lecture");
-//        try {
-//
-//            Item item = new Item().withPrimaryKey("lectureId", "GV01")
-//                    .withString("facultyId","FIT")
-//                    .withString("lectureName", "Nguyễn Minh Sơn")
-//                    .withString("dob", "2002-10-10")
-//                    .withString("address", "TP Thủ Đức")
-//                    .withString("gender", "Nam")
-//                    .withString("phone","0354964840")
-//                    .withString("image", AmazonS3Service.getInstance().uploadFile("u1.jpg", Files.newInputStream(new File("src/main/webapp/assets/admin/img/user/u1.jpg").toPath())))
-//                    .withString("deleted","0");
-//            table.putItem(item);
-//
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            return;
-//        }
-//        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("user");
-//        try {
-//
-//            Item item = new Item().withPrimaryKey("username", "admin")
-//                    .withString("password", UserUtils.hashPassword("admin"))
-//                    .withString("lectureId", "GV01")
-//                    .withString("deleted", "0");
-//            table.putItem(item);
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            return;
-//        }
-//        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("role");
-//        try {
-//
-//            Item item = new Item().withPrimaryKey("roleId", "role1")
-//                    .withString("roleName", "Admin")
-//                    .withString("deleted", "0");
-//            table.putItem(item);
-//            item = new Item().withPrimaryKey("roleId", "role2")
-//                    .withString("roleName", "Giảng viên")
-//                    .withString("deleted", "0");
-//            table.putItem(item);
-//
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            return;
-//        }
-//        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("user_role");
-//        try {
-//
-//            Item item = new Item().withPrimaryKey("username", "admin", "roleId", "role1");
-//            table.putItem(item);
-//            item = new Item().withPrimaryKey("username", "admin", "roleId", "role2");
-//            table.putItem(item);
-//
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    private static void InitialData(){
+        Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("faculty");
+        try {
+
+            Item item = new Item().withPrimaryKey("facultyId", "FIT")
+                    .withString("facultyName", "Công nghệ thông tin")
+                    .withString("image", AmazonS3Service.getInstance().uploadFile("FIT.png", Files.newInputStream(new File("src/main/webapp/assets/admin/img/faculty/FIT.png").toPath())))
+                    .withString("deleted", "0");
+            table.putItem(item);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("lecture");
+        try {
+
+            Item item = new Item().withPrimaryKey("lectureId", "GV01")
+                    .withString("facultyId","FIT")
+                    .withString("lectureName", "Nguyễn Minh Sơn")
+                    .withString("dob", "2002-10-10")
+                    .withString("address", "TP Thủ Đức")
+                    .withString("gender", "Nam")
+                    .withString("phone","0354964840")
+                    .withString("image", AmazonS3Service.getInstance().uploadFile("u1.jpg", Files.newInputStream(new File("src/main/webapp/assets/admin/img/user/u1.jpg").toPath())))
+                    .withString("deleted","0");
+            table.putItem(item);
+
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("user");
+        try {
+
+            Item item = new Item().withPrimaryKey("username", "admin")
+                    .withString("password", UserUtils.hashPassword("admin"))
+                    .withString("lectureId", "GV01")
+                    .withString("deleted", "0");
+            table.putItem(item);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("role");
+        try {
+
+            Item item = new Item().withPrimaryKey("roleId", "role1")
+                    .withString("roleName", "Admin")
+                    .withString("deleted", "0");
+            table.putItem(item);
+            item = new Item().withPrimaryKey("roleId", "role2")
+                    .withString("roleName", "Giảng viên")
+                    .withString("deleted", "0");
+            table.putItem(item);
+
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable("user_role");
+        try {
+
+            Item item = new Item().withPrimaryKey("username", "admin", "roleId", "role1");
+            table.putItem(item);
+            item = new Item().withPrimaryKey("username", "admin", "roleId", "role2");
+            table.putItem(item);
+
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     private static void StudentCreator(){
         try {
             Table table = AmazonDynamoDBService.getInstance().getDynamoDB().createTable("student",
@@ -220,7 +223,7 @@ public class DynamoDBUtils {
             System.err.println(e.getMessage());
             return;
         }
-        System.out.println("Student table created successfully");
+        System.out.println("User table created successfully");
     }
     private static void UserRoleCreator(){
         try {
@@ -244,7 +247,7 @@ public class DynamoDBUtils {
                 .listTables()
                 .getTableNames()
                 .forEach(
-                        client::deleteTable
+                    client::deleteTable
                 );
     }
     public static void GenerateTable(){

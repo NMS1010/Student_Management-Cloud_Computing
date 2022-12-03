@@ -1,4 +1,5 @@
 package common.interfaces;
+
 import java.util.ArrayList;
 
 public interface IRetrieveEntity <ReturnType, HashType, RangeType> {

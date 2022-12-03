@@ -1,18 +1,11 @@
-package models.view_models.student_class;
+package models.entities;
 
-public class StudentClassCreateRequest {
+public class StudentClass {
     private String studentClassId;
     private String studentClassName;
     private String facultyId;
-    private String deleted;
+    private int deleted;
 
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
-    }
     public String getFacultyId() {
         return facultyId;
     }
@@ -21,6 +14,13 @@ public class StudentClassCreateRequest {
         this.facultyId = facultyId;
     }
 
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
     public String getStudentClassId() {
         return studentClassId;
     }

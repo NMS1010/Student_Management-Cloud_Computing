@@ -9,9 +9,9 @@ import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import models.services.AmazonDynamoDB.AmazonDynamoDBService;
 import models.services.user_role.UserRoleService;
+import models.view_models.user.UserViewModel;
 import models.view_models.user.UserCreateRequest;
 import models.view_models.user.UserUpdateRequest;
-import models.view_models.user.UserViewModel;
 import utils.UserUtils;
 
 import java.security.NoSuchAlgorithmException;
@@ -167,7 +167,7 @@ public class UserRepository implements IUserRepository {
         if(u == null)
             return false;
         try {
-            return u.getPassword().equals(UserUtils.hashPassword(password));
+            return u.getPassword().equals(UserUtils.hashPassword(password)) && u.getDeleted() != 1;
         } catch (NoSuchAlgorithmException e) {
             return false;
         }

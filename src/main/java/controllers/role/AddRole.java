@@ -2,13 +2,12 @@ package controllers.role;
 
 import models.services.role.RoleService;
 import models.view_models.role.RoleCreateRequest;
+import models.view_models.role.RoleCreateRequest;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "AddRole", value = "/admin/role/add")
@@ -26,6 +25,7 @@ public class AddRole extends HttpServlet {
 
         createReq.setRoleId(request.getParameter("roleId"));
         createReq.setRoleName(request.getParameter("roleName"));
+        createReq.setDeleted(request.getParameter("deleted"));
 
         boolean success = RoleService.getInstance().insert(createReq);
         String error = "";

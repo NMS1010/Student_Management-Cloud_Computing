@@ -4,13 +4,12 @@ import models.services.faculty.FacultyService;
 import models.view_models.faculty.FacultyCreateRequest;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
 
 @WebServlet(name = "AddFaculty", value = "/admin/faculty/add")
 @MultipartConfig(
@@ -32,7 +31,7 @@ public class AddFaculty extends HttpServlet {
         createReq.setFile(request.getPart("faculty-logo"));
         createReq.setFacultyId(request.getParameter("facultyId"));
         createReq.setFacultyName(request.getParameter("facultyName"));
-
+        createReq.setDeleted(request.getParameter("deleted"));
         boolean success = FacultyService.getInstance().insert(createReq);
         String error = "";
         if(!success){

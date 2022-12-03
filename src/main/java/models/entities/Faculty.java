@@ -1,27 +1,28 @@
-package models.view_models.faculty;
+package models.entities;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
-import javax.servlet.http.Part;
 
-public class FacultyCreateRequest {
+public class Faculty {
+
     private String facultyId;
     private String facultyName;
-    private Part file;
-    private String deleted;
+    private String image;
+    private int deleted;
 
-    public String getDeleted() {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(String deleted) {
+    public void setDeleted(int deleted) {
         this.deleted = deleted;
-    }
-
-    public Part getFile() {
-        return file;
-    }
-
-    public void setFile(Part file) {
-        this.file = file;
     }
 
     public String getFacultyId() {

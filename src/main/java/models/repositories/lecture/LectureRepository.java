@@ -14,9 +14,9 @@ import models.services.AmazonDynamoDB.AmazonDynamoDBService;
 import models.services.AmazonS3.AmazonS3Service;
 import models.services.subject_group.SubjectGroupService;
 import models.view_models.faculty.FacultyViewModel;
+import models.view_models.lecture.LectureViewModel;
 import models.view_models.lecture.LectureCreateRequest;
 import models.view_models.lecture.LectureUpdateRequest;
-import models.view_models.lecture.LectureViewModel;
 import models.view_models.user.UserViewModel;
 import models.view_models.user_role.UserRoleViewModel;
 
@@ -46,7 +46,7 @@ public class LectureRepository implements ILectureRepository{
                     .withString("gender",request.getGender())
                     .withString("phone",request.getPhone())
                     .withString("image", AmazonS3Service.getInstance().uploadFile(request.getFile().getSubmittedFileName(), request.getFile().getInputStream()))
-                    .withString("deleted","0");
+                    .withString("deleted",request.getDeleted());
             table.putItem(item);
 
         }
@@ -70,7 +70,7 @@ public class LectureRepository implements ILectureRepository{
             expressionAttributeNames.put("#P6", "phone");
             if(!Objects.equals(request.getFile().getSubmittedFileName(), ""))
                 expressionAttributeNames.put("#P7", "image");
-
+            expressionAttributeNames.put("#P8", "deleted");
             Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
             expressionAttributeValues.put(":val1", request.getFacultyId());
             expressionAttributeValues.put(":val2", request.getLectureName());
@@ -78,7 +78,8 @@ public class LectureRepository implements ILectureRepository{
             expressionAttributeValues.put(":val4", request.getAddress());
             expressionAttributeValues.put(":val5", request.getGender());
             expressionAttributeValues.put(":val6", request.getPhone());
-            String s = "set #P1 = :val1, #P2 = :val2, #P3 = :val3, #P4 = :val4, #P5 = :val5, #P6 = :val6";
+            expressionAttributeValues.put(":val8", request.getDeleted());
+            String s = "set #P1 = :val1, #P2 = :val2, #P3 = :val3, #P4 = :val4, #P5 = :val5, #P6 = :val6, #P8 = :val8";
             if(!Objects.equals(request.getFile().getSubmittedFileName(), "")) {
                 expressionAttributeValues.put(":val7", AmazonS3Service.getInstance().uploadFile(request.getFile().getSubmittedFileName(), request.getFile().getInputStream()));
                 s += ", #P7 = :val7";

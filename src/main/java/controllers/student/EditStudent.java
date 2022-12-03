@@ -1,17 +1,17 @@
 package controllers.student;
 
 import models.services.student.StudentService;
+import models.services.student.StudentService;
+import models.view_models.student.StudentUpdateRequest;
 import models.view_models.student.StudentUpdateRequest;
 import models.view_models.student.StudentViewModel;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
+
 
 @WebServlet(name = "EditStudent", value = "/admin/student/edit")
 @MultipartConfig(
@@ -21,29 +21,29 @@ import java.io.IOException;
 )
 public class EditStudent extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String studentId = req.getParameter("studentId");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String studentId = request.getParameter("studentId");
 
         StudentViewModel student = StudentService.getInstance().retrieveById(studentId,"");
 
-        req.setAttribute("student", student);
+        request.setAttribute("student", student);
 
-        ServletUtils.forward(req,resp,"/admin/students");
+        ServletUtils.forward(request,response,"/admin/students");
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 
         StudentUpdateRequest updateReq = new StudentUpdateRequest();
 
-        String studentId = req.getParameter("studentId");
-        String studentName = req.getParameter("studentName");
-        String studentClassId = req.getParameter("studentClassId");
-        String address = req.getParameter("address");
-        String phone = req.getParameter("phone");
-        String gender = req.getParameter("gender");
-        String dob = req.getParameter("dob");
+        String studentId = request.getParameter("studentId");
+        String studentName = request.getParameter("studentName");
+        String studentClassId = request.getParameter("studentClassId");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String gender = request.getParameter("gender");
+        String dob = request.getParameter("dob");
 
         updateReq.setStudentId(studentId);
         updateReq.setStudentName(studentName);
@@ -52,13 +52,14 @@ public class EditStudent extends HttpServlet {
         updateReq.setDob(dob);
         updateReq.setPhone(phone);
         updateReq.setGender(gender);
-        updateReq.setFile(req.getPart("student-image"));
+        updateReq.setFile(request.getPart("student-image"));
+        updateReq.setDeleted(request.getParameter("deleted"));
 
         boolean isSuccess = StudentService.getInstance().update(updateReq);
         String error = "";
         if(!isSuccess){
             error = "?error=true";
         }
-        ServletUtils.redirect(resp, req.getContextPath() + "/admin/students" + error);
+        ServletUtils.redirect(response, request.getContextPath() + "/admin/students" + error);
     }
 }

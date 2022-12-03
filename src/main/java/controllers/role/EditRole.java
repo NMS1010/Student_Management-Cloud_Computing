@@ -1,15 +1,13 @@
 package controllers.role;
 
 import models.services.role.RoleService;
-import models.view_models.role.RoleUpdateRequest;
 import models.view_models.role.RoleViewModel;
+import models.view_models.role.RoleUpdateRequest;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "EditRole", value = "/admin/role/edit")
@@ -34,6 +32,7 @@ public class EditRole extends HttpServlet {
         String roleId = request.getParameter("roleId");
         String roleName = request.getParameter("roleName");
         updateReq.setRoleId(roleId);
+        updateReq.setDeleted(request.getParameter("deleted"));
 
         updateReq.setRoleName(roleName);
 

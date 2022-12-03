@@ -25,6 +25,7 @@ public class AddStudentClass extends HttpServlet {
         createReq.setStudentClassId(request.getParameter("studentClassId"));
         createReq.setStudentClassName(request.getParameter("studentClassName"));
         createReq.setFacultyId(request.getParameter("facultyId"));
+        createReq.setDeleted(request.getParameter("deleted"));
         boolean success = StudentClassService.getInstance().insert(createReq);
         String error = "";
         if(!success){

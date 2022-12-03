@@ -6,7 +6,15 @@ public class FacultyUpdateRequest {
     private String facultyId;
     private String facultyName;
     private Part file;
+    private String deleted;
 
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
     public Part getFile() {
         return file;
     }

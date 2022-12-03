@@ -71,6 +71,16 @@
                                                 <input id="finalGrade" name="finalGrade" class="form-control here slug-title" type="number" step="0.01" min="0" max="10" value="${grade.finalGrade}" required/>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <label for="deleted" class="col-12 col-form-label">Trạng thái</label>
+                                            <div class="col-12">
+                                                <select name="deleted" id="deleted" class="form-select" required>
+                                                    <option value="1">Đã xoá</option>
+                                                    <option value="0">Đang dùng</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="row mt-4">
                                             <div class="col col-6">
                                                 <input type="button" class="btn btn-danger clear-form" value="Huỷ">

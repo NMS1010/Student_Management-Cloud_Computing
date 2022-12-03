@@ -1,32 +1,23 @@
-package models.view_models.student;
+package models.entities;
 
+import java.util.Date;
 
-import javax.servlet.http.Part;
-
-public class StudentUpdateRequest {
+public class Student {
     private String studentId;
     private String studentClassId;
     private String studentName;
-    private String dob;
+    private Date dob;
     private String address;
     private String gender;
     private String phone;
-    private Part file;
-    private String deleted;
+    private int deleted;
 
-    public String getDeleted() {
+    public int getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(String deleted) {
+    public void setDeleted(int deleted) {
         this.deleted = deleted;
-    }
-    public Part getFile() {
-        return file;
-    }
-
-    public void setFile(Part file) {
-        this.file = file;
     }
     public String getStudentId() {
         return studentId;
@@ -52,11 +43,11 @@ public class StudentUpdateRequest {
         this.studentName = studentName;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 

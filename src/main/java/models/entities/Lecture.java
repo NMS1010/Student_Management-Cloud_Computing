@@ -1,53 +1,16 @@
-package models.view_models.lecture;
+package models.entities;
 
-import java.util.ArrayList;
 import java.util.Date;
 
-public class LectureViewModel {
+public class Lecture {
     private String lectureId;
     private String facultyId;
-    private String facultyName;
     private String lectureName;
     private String dob;
     private String address;
     private String gender;
     private String phone;
-    private String username;
-    private String password;
-    private ArrayList<String> roleIds;
     private int deleted;
-    private String image;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public ArrayList<String> getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(ArrayList<String> roleIds) {
-        this.roleIds = roleIds;
-    }
 
     public int getDeleted() {
         return deleted;
@@ -70,14 +33,6 @@ public class LectureViewModel {
 
     public void setFacultyId(String facultyId) {
         this.facultyId = facultyId;
-    }
-
-    public String getFacultyName() {
-        return facultyName;
-    }
-
-    public void setFacultyName(String facultyName) {
-        this.facultyName = facultyName;
     }
 
     public String getLectureName() {

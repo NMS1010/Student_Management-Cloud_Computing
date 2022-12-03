@@ -38,7 +38,7 @@ public class SubjectGroupRepository implements ISubjectGroupRepository{
                     .withString("subjectGroupName", request.getSubjectGroupName())
                     .withString("subjectId", request.getSubjectId())
                     .withString("lectureId", request.getLectureId())
-                    .withString("deleted", "0");
+                    .withString("deleted", request.getDeleted());
             table.putItem(item);
 
         }
@@ -57,14 +57,16 @@ public class SubjectGroupRepository implements ISubjectGroupRepository{
             expressionAttributeNames.put("#P1", "subjectGroupName");
             expressionAttributeNames.put("#P2", "subjectId");
             expressionAttributeNames.put("#P3", "lectureId");
+            expressionAttributeNames.put("#P4", "deleted");
 
             Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
             expressionAttributeValues.put(":val1", request.getSubjectGroupName());
             expressionAttributeValues.put(":val2", request.getSubjectId());
             expressionAttributeValues.put(":val3", request.getLectureId());
+            expressionAttributeValues.put(":val4", request.getDeleted());
 
             UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey("subjectGroupId", request.getSubjectGroupId())
-                    .withUpdateExpression("set #P1 = :val1,#P2 = :val2,#P3 = :val3 ")
+                    .withUpdateExpression("set #P1 = :val1,#P2 = :val2,#P3 = :val3, #P4 = :val4 ")
                     .withNameMap(expressionAttributeNames)
                     .withValueMap(expressionAttributeValues);
 

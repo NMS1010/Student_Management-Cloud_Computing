@@ -36,6 +36,7 @@ public class EditStudentClass extends HttpServlet {
         updateReq.setStudentClassId(studentClassId);
         updateReq.setFacultyId(facultyId);
         updateReq.setStudentClassName(studentClassName);
+        updateReq.setDeleted(request.getParameter("deleted"));
 
         boolean isSuccess = StudentClassService.getInstance().update(updateReq);
         String error = "";

@@ -1,17 +1,17 @@
-package models.view_models.subject;
+package models.entities;
 
-public class SubjectUpdateRequest {
+public class Subject {
     private String subjectId;
     private String subjectName;
     private int creditsNo;
     private int periodsNo;
-    private String deleted;
+    private int deleted;
 
-    public String getDeleted() {
+    public int getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(String deleted) {
+    public void setDeleted(int deleted) {
         this.deleted = deleted;
     }
     public String getSubjectId() {

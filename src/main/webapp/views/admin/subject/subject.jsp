@@ -61,6 +61,16 @@
                         <input id="periodsNo" name="periodsNo" class="form-control here slug-title" type="number" value="${subject.periodsNo}" required/>
                       </div>
                     </div>
+
+                    <div class="row">
+                      <label for="deleted" class="col-12 col-form-label">Trạng thái</label>
+                      <div class="col-12">
+                        <select name="deleted" id="deleted" class="form-select" required>
+                          <option value="1">Đã xoá</option>
+                          <option value="0">Đang dùng</option>
+                        </select>
+                      </div>
+                    </div>
                     <div class="row mt-4">
                       <div class="col col-6">
                         <input type="button" class="btn btn-danger clear-form" value="Huỷ">

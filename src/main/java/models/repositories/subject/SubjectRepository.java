@@ -9,9 +9,9 @@ import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import models.services.AmazonDynamoDB.AmazonDynamoDBService;
 import models.services.subject_group.SubjectGroupService;
+import models.view_models.subject.SubjectViewModel;
 import models.view_models.subject.SubjectCreateRequest;
 import models.view_models.subject.SubjectUpdateRequest;
-import models.view_models.subject.SubjectViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class SubjectRepository implements ISubjectRepository{
                     .withString("subjectName", request.getSubjectName())
                     .withString("creditsNo", String.valueOf(request.getCreditsNo()))
                     .withString("periodsNo", String.valueOf(request.getPeriodsNo()))
-                    .withString("deleted", "0");
+                    .withString("deleted", request.getDeleted());
             table.putItem(item);
 
         }
@@ -53,14 +53,16 @@ public class SubjectRepository implements ISubjectRepository{
             expressionAttributeNames.put("#P1", "subjectName");
             expressionAttributeNames.put("#P2", "creditsNo");
             expressionAttributeNames.put("#P3", "periodsNo");
+            expressionAttributeNames.put("#P4", "deleted");
 
             Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
             expressionAttributeValues.put(":val1", request.getSubjectName());
             expressionAttributeValues.put(":val2", String.valueOf(request.getCreditsNo()));
             expressionAttributeValues.put(":val3", String.valueOf(request.getPeriodsNo()));
+            expressionAttributeValues.put(":val4", request.getDeleted());
 
             UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey("subjectId", request.getSubjectId())
-                    .withUpdateExpression("set #P1 = :val1, #P2 = :val2, #P3 = :val3")
+                    .withUpdateExpression("set #P1 = :val1, #P2 = :val2, #P3 = :val3, #P4 = :val4")
                     .withNameMap(expressionAttributeNames)
                     .withValueMap(expressionAttributeValues);
 

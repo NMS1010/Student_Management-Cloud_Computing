@@ -64,6 +64,15 @@
                     </div>
 
                     <div class="row">
+                      <label for="deleted" class="col-12 col-form-label">Trạng thái</label>
+                      <div class="col-12">
+                        <select name="deleted" id="deleted" class="form-select" required>
+                          <option value="1">Đã xoá</option>
+                          <option value="0">Đang dùng</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
                       <label for="dob" class="col-12 col-form-label">Ngày sinh</label>
                       <div class="col-12">
                         <input id="dob" name="dob" class="form-control here slug-title" type="date" value="${student.dob}" required/>

@@ -1,14 +1,14 @@
 package controllers.grade;
 
+import models.services.faculty.FacultyService;
 import models.services.grade.GradeService;
+import models.view_models.faculty.FacultyCreateRequest;
 import models.view_models.grade.GradeCreateRequest;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "AddGrade", value = "/admin/grade/add")
@@ -31,6 +31,7 @@ public class AddGrade extends HttpServlet {
         createReq.setSubjectGroupId(subjectGroupId);
         createReq.setMiddleGrade(Double.parseDouble(middleGrade));
         createReq.setFinalGrade(Double.parseDouble(finalGrade));
+        createReq.setDeleted(request.getParameter("deleted"));
 
         createReq.setTotalGrade(0.5 * (createReq.getMiddleGrade() + createReq.getFinalGrade()));
 

@@ -6,22 +6,20 @@ import models.services.user.UserService;
 import models.services.user_role.UserRoleService;
 import models.view_models.lecture.LectureUpdateRequest;
 import models.view_models.lecture.LectureViewModel;
+import models.view_models.user.UserCreateRequest;
 import models.view_models.user.UserUpdateRequest;
 import models.view_models.user_role.UserRoleCreateRequest;
 import models.view_models.user_role.UserRoleViewModel;
 import utils.ServletUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static models.services.lecture.LectureService.getInstance;
+import static models.services.lecture.LectureService.*;
 
 @WebServlet(name = "EditLecture", value = "/admin/lecture/edit")
 @MultipartConfig(
@@ -54,7 +52,10 @@ public class EditLecture extends HttpServlet {
         String phone = request.getParameter("phone");
         String gender = request.getParameter("gender");
         String dob = request.getParameter("dob");
-
+        String status = request.getParameter("deleted");
+        if(status == null || status.equals("")){
+            status = "0";
+        }
         updateReq.setLectureId(lectureId);
         updateReq.setLectureName(lectureName);
         updateReq.setFacultyId(facultyId);
@@ -63,6 +64,7 @@ public class EditLecture extends HttpServlet {
         updateReq.setPhone(phone);
         updateReq.setGender(gender);
         updateReq.setFile(request.getPart("lecture-image"));
+        updateReq.setDeleted(status);
         boolean isSuccess = LectureService.getInstance().update(updateReq);
         String error = "";
         if(!isSuccess){

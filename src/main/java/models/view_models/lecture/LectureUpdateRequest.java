@@ -1,6 +1,7 @@
 package models.view_models.lecture;
 
 import javax.servlet.http.Part;
+import java.util.Date;
 
 public class LectureUpdateRequest {
     private String lectureId;
@@ -11,7 +12,15 @@ public class LectureUpdateRequest {
     private String gender;
     private String phone;
     private Part file;
+    private String deleted;
 
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
     public Part getFile() {
         return file;
     }
