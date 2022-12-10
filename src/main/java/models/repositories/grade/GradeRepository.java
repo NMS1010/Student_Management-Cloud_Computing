@@ -33,6 +33,8 @@ public class GradeRepository implements IGradeRepository{
 
     @Override
     public boolean insert(GradeCreateRequest request) {
+        if(retrieveById(request.getStudentId(), request.getSubjectGroupId()) == null)
+            return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {
 
@@ -129,6 +131,8 @@ public class GradeRepository implements IGradeRepository{
         catch (Exception e) {
             return null;
         }
+        if(item == null)
+            return null;
         return getGradeViewModel(item.getString("studentId"),
                 item.getString("subjectGroupId"), item.getDouble("middleGrade"), item.getDouble("finalGrade"),item.getDouble("totalGrade"), item.getString("deleted"));
     }

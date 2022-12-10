@@ -31,6 +31,8 @@ public class StudentRepository implements IStudentRepository{
     private final String tableName = "student";
     @Override
     public boolean insert(StudentCreateRequest request) {
+        if(retrieveById(request.getStudentId(), "") == null)
+            return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {
 
@@ -150,6 +152,8 @@ public class StudentRepository implements IStudentRepository{
         catch (Exception e) {
             return null;
         }
+        if(item == null)
+            return null;
         return getStudentViewModel(item.getString("studentId"),
                 item.getString("studentClassId"),
                 item.getString("studentName"),

@@ -29,6 +29,8 @@ public class UserRepository implements IUserRepository {
     private final String tableName = "user";
     @Override
     public boolean insert(UserCreateRequest request) {
+        if(retrieveById(request.getUsername(), "") == null)
+            return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {
 

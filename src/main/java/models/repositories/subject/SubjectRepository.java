@@ -27,6 +27,8 @@ public class SubjectRepository implements ISubjectRepository{
     private final String tableName = "subject";
     @Override
     public boolean insert(SubjectCreateRequest request) {
+        if(retrieveById(request.getSubjectId(), "") == null)
+            return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {
 
@@ -119,6 +121,8 @@ public class SubjectRepository implements ISubjectRepository{
         catch (Exception e) {
             return null;
         }
+        if(item == null)
+            return null;
         return getSubjectViewModel(item.getString("subjectId"),
                 item.getString("subjectName"),
                 item.getString("creditsNo"),

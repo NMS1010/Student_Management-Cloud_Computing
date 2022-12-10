@@ -29,6 +29,8 @@ public class UserRoleRepository implements IUserRoleRepository{
 
     @Override
     public boolean insert(UserRoleCreateRequest request) {
+        if(retrieveById(request.getUsername(), request.getRoleId()) == null)
+            return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {
 
@@ -81,6 +83,8 @@ public class UserRoleRepository implements IUserRoleRepository{
         catch (Exception e) {
             return null;
         }
+        if(item == null)
+            return null;
         return getUserRoleViewModel(item.getString("username"),
                 item.getString("roleId"));
     }

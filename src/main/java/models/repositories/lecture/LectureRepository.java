@@ -35,6 +35,8 @@ public class LectureRepository implements ILectureRepository{
     private final String tableName = "lecture";
     @Override
     public boolean insert(LectureCreateRequest request) {
+        if(retrieveById(request.getLectureId(), "") == null)
+            return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {
 
@@ -168,6 +170,8 @@ public class LectureRepository implements ILectureRepository{
         catch (Exception e) {
             return null;
         }
+        if(item == null)
+            return null;
         return getLectureViewModel(item.getString("lectureId"),
                 item.getString("facultyId"),
                 item.getString("lectureName"),
