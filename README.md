@@ -10,6 +10,6 @@
 2. Nguyễn Đức Thành - 20110307
 3. Nguyễn Duy Đăng - 20110632
 # Công nghệ sử dụng: Java Servlet/JSP
-# Các bước thực hiện: 
-Thầy và các bạn tham khảo các bước thực hiện trong file báo cáo Word ở thư
+# Các bước triển khai: 
+Thầy và các bạn tham khảo các bước thực hiện trong file báo cáo Word mục 2.2, ở thư
 mục BaoCao
