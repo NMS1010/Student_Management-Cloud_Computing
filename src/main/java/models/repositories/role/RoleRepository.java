@@ -28,7 +28,7 @@ public class RoleRepository implements IRoleRepository{
     private final String tableName = "role";
     @Override
     public boolean insert(RoleCreateRequest request) {
-        if(retrieveById(request.getRoleId(), "") == null)
+        if(retrieveById(request.getRoleId(), "") != null)
             return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {

@@ -31,7 +31,7 @@ public class SubjectGroupRepository implements ISubjectGroupRepository{
     private final String tableName = "subject_group";
     @Override
     public boolean insert(SubjectGroupCreateRequest request) {
-        if(retrieveById(request.getSubjectGroupId(), "") == null)
+        if(retrieveById(request.getSubjectGroupId(), "") != null)
             return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {

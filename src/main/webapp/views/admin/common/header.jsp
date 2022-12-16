@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%--<jsp:useBean id="admin" class="models.view_models.users.UserViewModel" scope="session"/>--%>
 <header class="ec-main-header" id="header">
-    <nav class="navbar navbar-static-top navbar-expand-lg d-flex justify-content-between">
+    <nav class="navbar navbar-static-top navbar-expand-lg d-flex justify-content-end">
         <!-- Sidebar toggle button -->
 <%--        <button id="sidebar-toggler" class="sidebar-toggle"></button>--%>
         <!-- navbar right -->
@@ -34,9 +34,9 @@
                         </li>
                     </ul>
                 </li>
-<%--                <li class="right-sidebar-in right-sidebar-2-menu">--%>
-<%--                    <i class="mdi mdi-settings-outline mdi-spin"></i>--%>
-<%--                </li>--%>
+                <li class="right-sidebar-in right-sidebar-2-menu">
+                    <i class="mdi mdi-settings-outline mdi-spin"></i>
+                </li>
             </ul>
         </div>
     </nav>

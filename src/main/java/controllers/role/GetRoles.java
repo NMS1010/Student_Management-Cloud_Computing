@@ -19,7 +19,8 @@ public class GetRoles extends HttpServlet {
         String error = request.getParameter("error");
         if(error != null && !error.equals("") || (roles == null)){
             request.setAttribute("error",error);
-            roles = new ArrayList<>();
+            if(roles == null)
+                roles = new ArrayList<>();
         }
         request.setAttribute("roles",roles);
 

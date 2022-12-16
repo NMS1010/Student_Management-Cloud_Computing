@@ -31,7 +31,7 @@ public class FacultyRepository implements IFacultyRepository{
     private final String tableName = "faculty";
     @Override
     public boolean insert(FacultyCreateRequest request) {
-        if(retrieveById(request.getFacultyId(), "") == null)
+        if(retrieveById(request.getFacultyId(), "") != null)
             return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {

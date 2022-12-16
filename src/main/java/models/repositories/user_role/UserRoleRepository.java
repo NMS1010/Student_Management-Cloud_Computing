@@ -29,7 +29,7 @@ public class UserRoleRepository implements IUserRoleRepository{
 
     @Override
     public boolean insert(UserRoleCreateRequest request) {
-        if(retrieveById(request.getUsername(), request.getRoleId()) == null)
+        if(retrieveById(request.getUsername(), request.getRoleId()) != null)
             return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {

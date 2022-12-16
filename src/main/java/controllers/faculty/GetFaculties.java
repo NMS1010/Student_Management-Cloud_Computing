@@ -17,8 +17,10 @@ public class GetFaculties extends HttpServlet {
         ArrayList<FacultyViewModel> faculties = FacultyService.getInstance().retrieveAll();
 
         String error = request.getParameter("error");
-        if(error != null && !error.equals("") || (faculties == null)){
+        if(error != null && !error.equals("")){
             request.setAttribute("error",error);
+        }
+        if(faculties == null){
             faculties = new ArrayList<>();
         }
         request.setAttribute("faculties",faculties);

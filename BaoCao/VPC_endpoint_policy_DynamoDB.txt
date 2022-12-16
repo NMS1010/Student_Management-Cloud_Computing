@@ -1,0 +1,17 @@
+{
+	"Version": "2008-10-17",
+	"Statement": [
+		{
+			"Sid": "ReadOnly",
+			"Effect": "Allow",
+			"Principal": "*",
+			"Action": [
+				"dynamodb:DescribeTable",
+				"dynamodb:ListTables",
+				"dynamodb:Scan",
+				"dynamodb:GetItem"
+			],
+			"Resource": "*"
+		}
+	]
+}

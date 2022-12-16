@@ -33,7 +33,7 @@ public class GradeRepository implements IGradeRepository{
 
     @Override
     public boolean insert(GradeCreateRequest request) {
-        if(retrieveById(request.getStudentId(), request.getSubjectGroupId()) == null)
+        if(retrieveById(request.getStudentId(), request.getSubjectGroupId()) != null)
             return false;
         Table table = AmazonDynamoDBService.getInstance().getDynamoDB().getTable(tableName);
         try {
